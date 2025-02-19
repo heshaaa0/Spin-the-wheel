@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SLIM BRAND WEEK</title>
+    <!---------------  CSS  --------------------->
+    <link rel="stylesheet" href="style.css" />
+    <!---------------  Font Aewsome  --------------------->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!---------------  Chart JS  --------------------->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <!---------------  Chart JS Plugin  --------------------->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
+  </head>
+  <body>
+    <div class="em-logo">
+      <img
+        src="EMERGING MEDIA LOGO_WHITE_TRANSPRANT.png"
+        alt="Emerging Media Logo"
+      />
+    </div>
+    <div id="txt"><p>Spin the Wheel and Win Exciting Gift</p></div>
+    <video id="video-background" autoplay loop muted>
+      Your browser does not support the video tag.
+    </video>
+
+    <div id="text"><p></p></div>
+    <div class="background-animation" id="gift"></div>
+    <div class="circle"></div>
+    <div class="container">
+      <div class="wheel_box">
+        <canvas id="spinWheel"></canvas>
+        <button id="spin_btn">Spin</button>
+        <i class="fa-solid fa-caret-up"></i>
+      </div>
+    </div>
+    <div class="brand-week-logo">
+      <img src="BRAND-WEEK.jpg" alt="Brand Week Logo" />
+    </div>
+    <!---------------  SCRIPT  --------------------->
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>

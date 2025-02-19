@@ -1,0 +1,243 @@
+/*-----------------  GOOGLE FONTS  -----------------*/
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif&display=swap");
+
+/*-----------------  VARIABLES  -----------------*/
+:root {
+  /* Colors */
+  --white_color: rgb(255, 255, 255);
+  --gold_color: rgb(212, 255, 177);
+  --green_color: rgb(255, 230, 0);
+  --body_background: linear-gradient(to right, #c1c5ff, #c9009d);
+  --spin_background: linear-gradient(to right, #ff0845, #f00034);
+}
+/*-----------------  Base  -----------------*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "PT Serif", serif;
+}
+body {
+  position: fixed;
+
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+#video-background {
+  background: linear-gradient(120deg, #1e3c72, #2a5298, #00c6ff);
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+}
+/*-----------------  Styling Start  -----------------*/
+h1 {
+  position: absolute;
+  font-size: 4rem;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--gold_color);
+}
+.container {
+  width: 90%;
+  max-width: 34.37rem;
+  margin-top: -8rem;
+  max-height: 90vh;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  padding: 3rem;
+  border-radius: 1rem;
+  position: fixed;
+}
+.wheel_box {
+  position: relative;
+  width: 200%;
+  height: 200%;
+  left: -220px;
+  background-image: url(CIRCLE\ BACK_00000.png);
+
+  border: 40px solid #ff184a;
+  background: linear-gradient(to right, #ffffff, hsl(0, 0%, 100%));
+  border-radius: 50%;
+}
+#spinWheel {
+  max-height: inherit;
+  width: inherit;
+  transform: rotate(270deg);
+}
+#spin_btn {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  height: 20%;
+  width: 20%;
+  border-radius: 50%;
+  cursor: pointer;
+  border-width: 10px;
+  border-color: rgba(237, 241, 0, 0.897);
+  background: var(--spin_background);
+  color: var(--white_color);
+  text-transform: uppercase;
+  font-size: 3rem;
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+}
+.fa-solid {
+  position: absolute;
+  top: -16%;
+  left: 43%;
+  font-size: 10rem;
+  color: var(--green_color);
+  transform: rotate(180deg);
+  margin-top: 25px;
+}
+#txt {
+  font-size: 3.3rem;
+  text-align: center;
+  margin-left: 5rem;
+  width: 1000px;
+  margin-top: 8px;
+  color: #fff;
+  font-weight: 800;
+  z-index: 2;
+}
+#gifttext {
+  font-size: 8rem;
+  text-align: center;
+  margin-left: 15rem;
+  width: 600px;
+  margin-top: 10rem;
+  color: var(--gold_color);
+  font-weight: 500;
+}
+.circle {
+  background-image: url(CIRCLE.png);
+  margin-top: 300px;
+}
+
+.icon-label {
+  position: absolute;
+  font-size: 30px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+@keyframes giftAnimation {
+  0% {
+    transform: scale(1);
+    color: #ffcc00; /* Initial color */
+  }
+  50% {
+    transform: scale(1.5);
+    color: #ffcc00; /* Highlight color */
+  }
+  100% {
+    transform: scale(1);
+    color: #ffcc00; /* Back to initial color */
+  }
+}
+
+/* Apply the animation to the element with the gift-animation class */
+.gift-animation {
+  animation: giftAnimation 2s ease-out;
+}
+
+@keyframes party {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.gift {
+  background: url("GIFT.png") no-repeat;
+  background-size: cover;
+  width: 100px;
+  height: 100px;
+  animation: party 10s ease-out;
+}
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background: url("celebration.gif") center/cover no-repeat fixed;
+  /* Place it behind other elements */
+}
+
+@media only screen and (max-width: 428px) and (max-height: 926px) {
+  body {
+    font-size: 14px; /* Adjust font size for better readability */
+    padding: 10px; /* Add some padding */
+  }
+
+  #gifttext,
+  #text {
+    font-size: 16px; /* Adjust text size */
+    text-align: center; /* Center text */
+  }
+
+  .wheel_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center elements inside */
+    margin: 0 auto; /* Center the wheel box */
+  }
+
+  #spinWheel {
+    width: 80vw; /* Set width relative to viewport */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+  #spin_btn {
+    width: 60%; /* Make button width responsive */
+    padding: 10px; /* Increase padding */
+    font-size: 18px; /* Increase button font size */
+  }
+
+  .circle {
+    width: 100px; /* Adjust circle size */
+    height: 100px;
+    background-color: #ccc; /* Example background color */
+    border-radius: 50%; /* Make it circular */
+    margin: 10px auto; /* Center circle */
+  }
+}
+
+.brand-week-logo {
+  position: fixed;
+  bottom: 20px; /* Adjust as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  margin-top: 50px;
+}
+
+.brand-week-logo img {
+  max-width: 550px; /* Adjust size as needed */
+  height: auto;
+}
+
+.em-logo img {
+  max-width: 550px; /* Adjust size as needed */
+  margin-top: 30px;
+  height: 120px;
+  align-items: end;
+  justify-items: center;
+  margin-left: 30px;
+}
