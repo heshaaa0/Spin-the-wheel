@@ -51,16 +51,16 @@ let spinChart = new Chart(spinWheel, {
 
   data: {
     labels: [
-      "🧳",
+      "🎁",
       "OUT",
       "🔄",
-      "☂️",
+      "🎁",
       "🔄",
       "OUT",
-      "🍺",
+      "🎁",
       "OUT",
       "🔄",
-      "👜",
+      "🎁",
       "🔄",
       "OUT",
     ],
@@ -162,9 +162,9 @@ const generateValue = (angleValue) => {
 /* --------------- Spin Wheel Logic --------------------- */
 
 let specialStopsCount = 0;
-const specialStopLimit = 2;
-const startHour = 9;
-const endHour = 21;
+const specialStopLimit = 5;
+const startHour = 18;
+const endHour = 22;
 
 const specialRanges = [
   { min: 331, max: 360 },
