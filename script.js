@@ -23,21 +23,21 @@ const spinValues = [
 
 ];
 /* --------------- Size Of Each Piece  --------------------- */
-const size = [10, 10,  10, 10, 10, 10,10, 10,  10, 10, 10, 10 ];
+const size = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
 /* --------------- Background Colors  --------------------- */
 var spinColors = [
   'rgb(255, 16, 71)',//green   
-  "rgb(255, 255, 255)", 
+  "rgb(255, 255, 255)",
   'rgb(255, 16, 71)',//green  
-   "rgb(255, 255, 255)", 
+  "rgb(255, 255, 255)",
   "rgb(255, 16, 71)",//green 
-  "rgb(255, 255, 255)",  
+  "rgb(255, 255, 255)",
   "rgb(255, 16, 71)",//green 
-  "rgb(255, 255, 255)",  
+  "rgb(255, 255, 255)",
   "rgb(255, 16, 71)",//green  
-   "rgb(255, 255, 255)", 
+  "rgb(255, 255, 255)",
   "rgb(255, 16, 71)",//green  
-  "rgb(255, 255, 255)",  
+  "rgb(255, 255, 255)",
 ];
 /* --------------- Chart --------------------- */
 /* --------------- Guide : https://chartjs-plugin-datalabels.netlify.app/guide/getting-started.html --------------------- */
@@ -48,21 +48,21 @@ let winnerCounts = {
 };
 "S🎫"
 let spinChart = new Chart(spinWheel, {
-  
+
   plugins: [ChartDataLabels],
   type: "doughnut",
-  
+
   data: {
-    labels: ['🧳', 'OUT','🔄', '☂️','🔄', 'OUT','🍺', 'OUT','🔄', '👜','🔄', 'OUT', ],
+    labels: ['🎁', 'OUT', '🔄', '🎁', '🔄', 'OUT', '🎁', 'OUT', '🔄', '🎁', '🔄', 'OUT',],
     datasets: [
       {
         backgroundColor: spinColors,
         data: size,
         cutout: 100,
-        
-      
 
-        
+
+
+
       },
     ],
   },
@@ -82,8 +82,8 @@ let spinChart = new Chart(spinWheel, {
         font: { size: 60, weight: 600 },
         anchor: 'center', // Adjust anchor property (start, center, end)
         align: 'center',
-        
-        
+
+
       },
     },
   },
@@ -92,46 +92,46 @@ let spinChart = new Chart(spinWheel, {
 const generateValue = (angleValue) => {
   for (let i of spinValues) {
     if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
-      if(31<= i.minDegree && i.maxDegree <=60 ){
-       
-       
-       
+      if (31 <= i.minDegree && i.maxDegree <= 60) {
+
+
+
         spinBtn.disabled = false;
         break;
-      }else if(0<= i.minDegree && i.maxDegree <=30 ){
-       
-      
-       
+      } else if (0 <= i.minDegree && i.maxDegree <= 30) {
+
+
+
         spinBtn.disabled = false;
         break;
-      }else if(331<= i.minDegree && i.maxDegree <=360 ){
+      } else if (331 <= i.minDegree && i.maxDegree <= 360) {
         gifttext.innerHTML = `<p>GIFT</p>`;
         txt.style.display = 'none';
         gifttext.classList.add('gift-animation');
         gift.style.display = 'block';
-        
+
         spinBtn.disabled = false;
-         break;
-       
-      }else if(301<= i.minDegree && i.maxDegree <=330 ){
-        
-       
+        break;
+
+      } else if (301 <= i.minDegree && i.maxDegree <= 330) {
+
+
         spinBtn.disabled = false;
-         break;
-      }else if(241<= i.minDegree && i.maxDegree <=270 ){
+        break;
+      } else if (241 <= i.minDegree && i.maxDegree <= 270) {
         gifttext.innerHTML = `<p>GIFT</p>`;
         gifttext.classList.add('gift-animation');
         txt.style.display = 'none';
         gift.style.display = 'block';
-       
-        
+
+
         spinBtn.disabled = false;
         break;
-      }else if(211<= i.minDegree && i.maxDegree <=240 ){
-      
+      } else if (211 <= i.minDegree && i.maxDegree <= 240) {
+
         spinBtn.disabled = false;
         break;
-      }else if(151<= i.minDegree && i.maxDegree <=180 ){
+      } else if (151 <= i.minDegree && i.maxDegree <= 180) {
         gifttext.innerHTML = `<p>GIFT</p>`;
         gifttext.classList.add('gift-animation');
         txt.style.display = 'none';
@@ -139,53 +139,52 @@ const generateValue = (angleValue) => {
 
         spinBtn.disabled = false;
         break;
-      }else if(121<= i.minDegree && i.maxDegree <=150 ){
-        
-        
+      } else if (121 <= i.minDegree && i.maxDegree <= 150) {
+
+
         spinBtn.disabled = false;
         break;
-      }else if(91<= i.minDegree && i.maxDegree <=120 ){
-       
-        
+      } else if (91 <= i.minDegree && i.maxDegree <= 120) {
+
+
         spinBtn.disabled = false;
         break;
-      }else if(61<= i.minDegree && i.maxDegree <=90 ){
+      } else if (61 <= i.minDegree && i.maxDegree <= 90) {
         gifttext.innerHTML = `<p>GIFT</p>`;
         gifttext.classList.add('gift-animation');
         txt.style.display = 'none';
         gift.style.display = 'block';
-        
+
         spinBtn.disabled = false;
         break;
-      } else if(271<= i.minDegree && i.maxDegree <=300 ){
-        
-       
+      } else if (271 <= i.minDegree && i.maxDegree <= 300) {
+
+
         spinBtn.disabled = false;
         break;
       }
-      else{
-       
+      else {
+
         spinBtn.disabled = false;
-         break;
+        break;
       }
-     
-      
+
+
     }
   }
-  
-      setTimeout(reset, 15000);
-  
-  
+
+  setTimeout(reset, 15000);
+
+
 };
 
 /* --------------- Spin Wheel Logic --------------------- */
-
 
 let specialStopsCount = 0;
 const specialStopLimit = 2;
 const startHour = 18;
 const endHour = 21;
-
+let lastSpinDate = new Date().toDateString();
 
 const specialRanges = [
   { min: 331, max: 360 },
@@ -194,39 +193,52 @@ const specialRanges = [
   { min: 61, max: 90 },
 ];
 
-
+// Check if the current time is within the allowed special stop hours
 const isWithinAllowedTime = () => {
   const currentHour = new Date().getHours();
   return currentHour >= startHour && currentHour < endHour;
 };
 
-
+// Check if the degree falls in a special range
 const isSpecialRange = (degree) => {
   return specialRanges.some((range) => degree >= range.min && degree <= range.max);
 };
 
+// Reset special stop count if it's a new day
+const resetSpecialCountIfNewDay = () => {
+  let currentDate = new Date().toDateString();
+  if (currentDate !== lastSpinDate) {
+    specialStopsCount = 0;
+    lastSpinDate = currentDate;
+  }
+};
 
+// Generate a valid random spin degree
 const generateRandomDegree = () => {
+  resetSpecialCountIfNewDay();
+  
   let degree;
   let isValid = false;
+  let retryCount = 100; // Prevent infinite loops
 
-  while (!isValid) {
-    degree = Math.floor(Math.random() * 360); 
+  while (!isValid && retryCount > 0) {
+    degree = Math.floor(Math.random() * 360);
     const inSpecialRange = isSpecialRange(degree);
-
 
     if (!isWithinAllowedTime() || !inSpecialRange || specialStopsCount < specialStopLimit) {
       isValid = true;
-
-   
+      
+      // Increase special stop count if it's within the special time and range
       if (isWithinAllowedTime() && inSpecialRange) {
         specialStopsCount++;
       }
     }
+
+    retryCount--; // Avoid infinite loops
   }
+
   return degree;
 };
-
 /* --------------- Spinning Code --------------------- */
 
 let count = 0;
@@ -266,7 +278,7 @@ function reset() {
   text.innerHTML = `<p></p>`;
   gifttext.innerHTML = `<p></p>`;
   gift.style.display = 'none';
-  txt.style.display ='block';
+  txt.style.display = 'block';
   spinBtn.disabled = false;
 }
 
