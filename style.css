@@ -271,8 +271,10 @@ h1 {
 }
 
 .brand-week-logo img {
-  max-width: 550px;
+  max-width: 650px;
   height: auto;
+  height: 700px;
+  object-fit: contain;
 }
 
 .em-logo {
