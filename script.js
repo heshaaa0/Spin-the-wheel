@@ -45,7 +45,6 @@ var spinColors = [
 let spinChart = new Chart(spinWheel, {
   plugins: [ChartDataLabels],
   type: "doughnut",
-
   data: {
     labels: [
       "🎁", "OUT", "🔄", "🎁", "🔄", "OUT", "🎁", "OUT", "🔄", "🎁", "🔄", "OUT"
@@ -160,10 +159,24 @@ spinBtn.addEventListener("click", () => {
       resultValue -= 5;
       spinChart.options.rotation = 0; // Reset rotation after a full turn
     } else if (count > 15 && spinChart.options.rotation === randomDegree) {
+      // Disabling the "🎁" icon during spin
+      const labels = spinChart.data.labels;
+      const giftIndex = labels.indexOf("🎁");
+      if (giftIndex !== -1) {
+        spinChart.data.datasets[0].backgroundColor[giftIndex] = "gray"; // Change the color of the "🎁" segment
+      }
       generateValue(randomDegree); // Display the result
       clearInterval(rotationInterval);
       count = 0;
       resultValue = 101;
+
+      // Re-enable the "🎁" segment after the spin
+      if (giftIndex !== -1) {
+        setTimeout(() => {
+          spinChart.data.datasets[0].backgroundColor[giftIndex] = "rgb(255, 16, 71)";
+          spinChart.update();
+        }, 1000);
+      }
     }
   }, 30);
 });
@@ -181,5 +194,3 @@ function reset() {
   txt.style.display = "block";
   spinBtn.disabled = false;
 }
-
-/* --------------- End Spin Wheel  --------------------- */
