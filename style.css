@@ -252,7 +252,7 @@ h1 {
     width: 100px;
     /* Adjust circle size */
     height: 50px;
-    background-color: #ccc;
+    /* background-color: #ccc; */
     /* Example background color */
     border-radius: 50%;
     /* Make it circular */

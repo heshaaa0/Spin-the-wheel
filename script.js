@@ -20,7 +20,9 @@ const spinValues = [
   { minDegree: 151, maxDegree: 180, value: 2000 },
   { minDegree: 121, maxDegree: 150, value: 300 },
   { minDegree: 91, maxDegree: 120, value: 300 },
+  // "🎁" is NOT included in spinValues to avoid selection
 ];
+
 
 /* --------------- Size Of Each Piece  --------------------- */
 const size = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
@@ -60,9 +62,9 @@ let spinChart = new Chart(spinWheel, {
   options: {
     responsive: true,
     animation: {
-      duration: 0 // Ensuring no animation delay
+      duration: 0
     },
-    rotation: 0, // Set initial rotation to zero
+    rotation: 0,
     plugins: {
       tooltip: { enabled: false },
       legend: { display: false },
@@ -125,24 +127,32 @@ const generateRandomDegree = () => {
   let degree;
   let isValid = false;
 
+  // List of segments to avoid (e.g., "🎁" and others you may want to exclude)
+  const avoidSegments = [spinChart.data.labels.indexOf("🎁")];
+
   while (!isValid) {
     degree = Math.floor(Math.random() * 360);
-    const inSpecialRange = isSpecialRange(degree);
 
-    if (
-      !isWithinAllowedTime() ||
-      !inSpecialRange ||
-      specialStopsCount < specialStopLimit
-    ) {
-      isValid = true;
-
-      if (isWithinAllowedTime() && inSpecialRange) {
-        specialStopsCount++;
+    // Check if the degree falls in any of the avoid segments
+    let isAvoided = false;
+    for (let i of avoidSegments) {
+      if (
+        degree >= spinValues[i].minDegree &&
+        degree <= spinValues[i].maxDegree
+      ) {
+        isAvoided = true;
+        break;
       }
+    }
+
+    if (!isAvoided) {
+      isValid = true;
     }
   }
   return degree;
 };
+
+
 
 /* --------------- Spinning Code --------------------- */
 
