@@ -21,8 +21,10 @@ const spinValues = [
   { minDegree: 121, maxDegree: 150, value: 300 },
   { minDegree: 91, maxDegree: 120, value: 300 },
 ];
+
 /* --------------- Size Of Each Piece  --------------------- */
 const size = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
+
 /* --------------- Background Colors  --------------------- */
 var spinColors = [
   "rgb(255, 16, 71)", //green
@@ -38,31 +40,15 @@ var spinColors = [
   "rgb(255, 16, 71)", //green
   "rgb(255, 255, 255)",
 ];
-/* --------------- Chart --------------------- */
-/* --------------- Guide : https://chartjs-plugin-datalabels.netlify.app/guide/getting-started.html --------------------- */
 
-let winnerCounts = {
-  rs1000: 0,
-};
-("S🎫");
+/* --------------- Chart --------------------- */
 let spinChart = new Chart(spinWheel, {
   plugins: [ChartDataLabels],
   type: "doughnut",
 
   data: {
     labels: [
-      "🎁",
-      "OUT",
-      "🔄",
-      "🎁",
-      "🔄",
-      "OUT",
-      "🎁",
-      "OUT",
-      "🔄",
-      "🎁",
-      "🔄",
-      "OUT",
+      "🎁", "OUT", "🔄", "🎁", "🔄", "OUT", "🎁", "OUT", "🔄", "🎁", "🔄", "OUT"
     ],
     datasets: [
       {
@@ -74,88 +60,36 @@ let spinChart = new Chart(spinWheel, {
   },
   options: {
     responsive: true,
-
     animation: { duration: 0 },
     plugins: {
       tooltip: false,
-      legend: {
-        display: false,
-      },
+      legend: { display: false },
       datalabels: {
         rotation: 90,
         color: "#0d0d0d",
         formatter: (_, context) => context.chart.data.labels[context.dataIndex],
         font: { size: 60, weight: 600 },
-        anchor: "center", // Adjust anchor property (start, center, end)
+        anchor: "center",
         align: "center",
       },
     },
   },
 });
+
 /* --------------- Display Value Based On The Angle --------------------- */
 const generateValue = (angleValue) => {
   for (let i of spinValues) {
     if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
-      if (31 <= i.minDegree && i.maxDegree <= 60) {
-        spinBtn.disabled = false;
-        break;
-      } else if (0 <= i.minDegree && i.maxDegree <= 30) {
-        spinBtn.disabled = false;
-        break;
-      } else if (331 <= i.minDegree && i.maxDegree <= 360) {
-        gifttext.innerHTML = `<p>GIFT</p>`;
-        txt.style.display = "none";
-        gifttext.classList.add("gift-animation");
-        gift.style.display = "block";
-
-        spinBtn.disabled = false;
-        break;
-      } else if (301 <= i.minDegree && i.maxDegree <= 330) {
-        spinBtn.disabled = false;
-        break;
-      } else if (241 <= i.minDegree && i.maxDegree <= 270) {
+      if (i.minDegree <= 90 && i.maxDegree <= 90) {
         gifttext.innerHTML = `<p>GIFT</p>`;
         gifttext.classList.add("gift-animation");
         txt.style.display = "none";
         gift.style.display = "block";
-
-        spinBtn.disabled = false;
-        break;
-      } else if (211 <= i.minDegree && i.maxDegree <= 240) {
-        spinBtn.disabled = false;
-        break;
-      } else if (151 <= i.minDegree && i.maxDegree <= 180) {
-        gifttext.innerHTML = `<p>GIFT</p>`;
-        gifttext.classList.add("gift-animation");
-        txt.style.display = "none";
-        gift.style.display = "block";
-
-        spinBtn.disabled = false;
-        break;
-      } else if (121 <= i.minDegree && i.maxDegree <= 150) {
-        spinBtn.disabled = false;
-        break;
-      } else if (91 <= i.minDegree && i.maxDegree <= 120) {
-        spinBtn.disabled = false;
-        break;
-      } else if (61 <= i.minDegree && i.maxDegree <= 90) {
-        gifttext.innerHTML = `<p>GIFT</p>`;
-        gifttext.classList.add("gift-animation");
-        txt.style.display = "none";
-        gift.style.display = "block";
-
-        spinBtn.disabled = false;
-        break;
-      } else if (271 <= i.minDegree && i.maxDegree <= 300) {
-        spinBtn.disabled = false;
-        break;
-      } else {
-        spinBtn.disabled = false;
-        break;
       }
+      spinBtn.disabled = false;
+      break;
     }
   }
-
   setTimeout(reset, 15000);
 };
 
@@ -214,7 +148,6 @@ let resultValue = 101;
 
 spinBtn.addEventListener("click", () => {
   spinBtn.disabled = true;
-
   const randomDegree = generateRandomDegree(); // Get a valid random degree
   console.log("Stopping Degree:", randomDegree);
 
