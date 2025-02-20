@@ -59,9 +59,12 @@ let spinChart = new Chart(spinWheel, {
   },
   options: {
     responsive: true,
-    animation: { duration: 0 },
+    animation: {
+      duration: 0 // Ensuring no animation delay
+    },
+    rotation: 0, // Set initial rotation to zero
     plugins: {
-      tooltip: false,
+      tooltip: { enabled: false },
       legend: { display: false },
       datalabels: {
         rotation: 90,
@@ -72,7 +75,8 @@ let spinChart = new Chart(spinWheel, {
         align: "center",
       },
     },
-  },
+  }
+
 });
 
 /* --------------- Display Value Based On The Angle --------------------- */
