@@ -8,258 +8,197 @@ const gift = document.getElementById('gift');
 
 /* --------------- Minimum And Maximum Angle For A value  --------------------- */
 const spinValues = [
-  { minDegree: 61, maxDegree: 90, value: 300 },
-  { minDegree: 31, maxDegree: 60, value: 500 },
-  { minDegree: 0, maxDegree: 30, value: 500 },
-  { minDegree: 331, maxDegree: 360, value: 400 },
-  { minDegree: 301, maxDegree: 330, value: 300 },
-  { minDegree: 271, maxDegree: 300, value: 300 },
-  { minDegree: 241, maxDegree: 270, value: 700 },
-  { minDegree: 211, maxDegree: 240, value: 500 },
-  { minDegree: 181, maxDegree: 210, value: 500 },
-  { minDegree: 151, maxDegree: 180, value: 2000 },
-  { minDegree: 121, maxDegree: 150, value: 300 },
-  { minDegree: 91, maxDegree: 120, value: 300 },
-
+  { minDegree: 61, maxDegree: 90, value: 300 },    // 🎁
+  { minDegree: 31, maxDegree: 60, value: 500 },    // OUT
+  { minDegree: 0, maxDegree: 30, value: 500 },     // 🔄
+  { minDegree: 331, maxDegree: 360, value: 400 },  // 🎁
+  { minDegree: 301, maxDegree: 330, value: 300 },  // 🔄
+  { minDegree: 271, maxDegree: 300, value: 300 },  // OUT
+  { minDegree: 241, maxDegree: 270, value: 700 },  // 🎁
+  { minDegree: 211, maxDegree: 240, value: 500 },  // OUT
+  { minDegree: 181, maxDegree: 210, value: 500 },  // 🔄
+  { minDegree: 151, maxDegree: 180, value: 2000 }, // 🎁
+  { minDegree: 121, maxDegree: 150, value: 300 },  // 🔄
+  { minDegree: 91, maxDegree: 120, value: 300 },   // OUT
 ];
+
 /* --------------- Size Of Each Piece  --------------------- */
 const size = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
+
 /* --------------- Background Colors  --------------------- */
 var spinColors = [
-  'rgb(255, 16, 71)',//green   
-  "rgb(255, 255, 255)",
-  'rgb(255, 16, 71)',//green  
-  "rgb(255, 255, 255)",
-  "rgb(255, 16, 71)",//green 
-  "rgb(255, 255, 255)",
-  "rgb(255, 16, 71)",//green 
-  "rgb(255, 255, 255)",
-  "rgb(255, 16, 71)",//green  
-  "rgb(255, 255, 255)",
-  "rgb(255, 16, 71)",//green  
-  "rgb(255, 255, 255)",
+  'rgb(255, 16, 71)', // Red
+  "rgb(255, 255, 255)", // White
+  'rgb(255, 16, 71)', // Red
+  "rgb(255, 255, 255)", // White
+  "rgb(255, 16, 71)", // Red
+  "rgb(255, 255, 255)", // White
+  "rgb(255, 16, 71)", // Red
+  "rgb(255, 255, 255)", // White
+  "rgb(255, 16, 71)", // Red
+  "rgb(255, 255, 255)", // White
+  "rgb(255, 16, 71)", // Red
+  "rgb(255, 255, 255)", // White
 ];
+
 /* --------------- Chart --------------------- */
-/* --------------- Guide : https://chartjs-plugin-datalabels.netlify.app/guide/getting-started.html --------------------- */
-
-let winnerCounts = {
-  rs1000: 0,
-
-};
-"S🎫"
+let winnerCounts = { rs1000: 0 };
 let spinChart = new Chart(spinWheel, {
-
   plugins: [ChartDataLabels],
   type: "doughnut",
-
   data: {
-    labels: ['🎁', 'OUT', '🔄', '🎁', '🔄', 'OUT', '🎁', 'OUT', '🔄', '🎁', '🔄', 'OUT',],
+    labels: ['🎁', 'OUT', '🔄', '🎁', '🔄', 'OUT', '🎁', 'OUT', '🔄', '🎁', '🔄', 'OUT'],
     datasets: [
       {
         backgroundColor: spinColors,
         data: size,
         cutout: 100,
-
-
-
-
       },
     ],
   },
   options: {
     responsive: true,
-
     animation: { duration: 0 },
     plugins: {
       tooltip: false,
-      legend: {
-        display: false,
-      },
+      legend: { display: false },
       datalabels: {
         rotation: 90,
         color: "#0d0d0d",
         formatter: (_, context) => context.chart.data.labels[context.dataIndex],
         font: { size: 60, weight: 600 },
-        anchor: 'center', // Adjust anchor property (start, center, end)
+        anchor: 'center',
         align: 'center',
-
-
       },
     },
   },
 });
+
+let totalPlayers = 0; // Track total players
+const maxWins = 5; // Maximum wins allowed
+let currentWins = 0; // Current wins
+let totalSpins = 0; // Track total spins
+let gameOver = false; // Track game-over state
+
 /* --------------- Display Value Based On The Angle --------------------- */
 const generateValue = (angleValue) => {
   for (let i of spinValues) {
     if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
-      if (31 <= i.minDegree && i.maxDegree <= 60) {
-
-
-
-        spinBtn.disabled = false;
-        break;
-      } else if (0 <= i.minDegree && i.maxDegree <= 30) {
-
-
-
-        spinBtn.disabled = false;
-        break;
-      } else if (331 <= i.minDegree && i.maxDegree <= 360) {
+      if ([61, 151, 241, 331].includes(i.minDegree)) { // Gift segments
         gifttext.innerHTML = `<p>GIFT</p>`;
-        txt.style.display = 'none';
-        gifttext.classList.add('gift-animation');
-        gift.style.display = 'block';
-
-        spinBtn.disabled = false;
-        break;
-
-      } else if (301 <= i.minDegree && i.maxDegree <= 330) {
-
-
-        spinBtn.disabled = false;
-        break;
-      } else if (241 <= i.minDegree && i.maxDegree <= 270) {
-        gifttext.innerHTML = `<p>GIFT</p>`;
-        gifttext.classList.add('gift-animation');
-        txt.style.display = 'none';
-        gift.style.display = 'block';
-
-
-        spinBtn.disabled = false;
-        break;
-      } else if (211 <= i.minDegree && i.maxDegree <= 240) {
-
-        spinBtn.disabled = false;
-        break;
-      } else if (151 <= i.minDegree && i.maxDegree <= 180) {
-        gifttext.innerHTML = `<p>GIFT</p>`;
-        gifttext.classList.add('gift-animation');
-        txt.style.display = 'none';
-        gift.style.display = 'block';
-
-        spinBtn.disabled = false;
-        break;
-      } else if (121 <= i.minDegree && i.maxDegree <= 150) {
-
-
-        spinBtn.disabled = false;
-        break;
-      } else if (91 <= i.minDegree && i.maxDegree <= 120) {
-
-
-        spinBtn.disabled = false;
-        break;
-      } else if (61 <= i.minDegree && i.maxDegree <= 90) {
-        gifttext.innerHTML = `<p>GIFT</p>`;
-        gifttext.classList.add('gift-animation');
-        txt.style.display = 'none';
-        gift.style.display = 'block';
-
-        spinBtn.disabled = false;
-        break;
-      } else if (271 <= i.minDegree && i.maxDegree <= 300) {
-
-
-        spinBtn.disabled = false;
-        break;
+        gifttext.classList.add("gift-animation");
+        gift.style.display = "block";
+        currentWins++; // Increment wins for gift outcomes
+      } else if ([31, 91, 211, 271].includes(i.minDegree)) { // OUT segments
+        gifttext.innerHTML = `<p>OUT - Game Over!</p>`;
+        text.innerHTML = `<p>No more spins allowed!</p>`;
+        gift.style.display = "none";
+        spinBtn.disabled = true; // Permanently disable spin button
+        gameOver = true; // Set game-over state
+      } else { // 🔄 segments
+        gifttext.innerHTML = `<p>SPIN AGAIN</p>`;
+        gift.style.display = "none";
       }
-      else {
-
-        spinBtn.disabled = false;
-        break;
+      if (!gameOver) {
+        spinBtn.disabled = false; // Re-enable button unless game is over
       }
-
-
+      break;
     }
   }
-
   setTimeout(reset, 15000);
-
-
 };
 
 /* --------------- Spin Wheel Logic --------------------- */
-
 let specialStopsCount = 0;
 const specialStopLimit = 2;
 const startHour = 18;
 const endHour = 21;
-let lastSpinDate = new Date().toDateString();
 
 const specialRanges = [
-  { min: 331, max: 360 },
-  { min: 241, max: 270 },
-  { min: 151, max: 180 },
-  { min: 61, max: 90 },
+  { min: 331, max: 360 }, // 🎁
+  { min: 241, max: 270 }, // 🎁
+  { min: 151, max: 180 }, // 🎁
+  { min: 61, max: 90 },   // 🎁
 ];
 
-// Check if the current time is within the allowed special stop hours
+const outRanges = [
+  { min: 31, max: 60 },   // OUT
+  { min: 91, max: 120 },  // OUT
+  { min: 211, max: 240 }, // OUT
+  { min: 271, max: 300 }, // OUT
+];
+
 const isWithinAllowedTime = () => {
   const currentHour = new Date().getHours();
   return currentHour >= startHour && currentHour < endHour;
 };
 
-// Check if the degree falls in a special range
 const isSpecialRange = (degree) => {
-  return specialRanges.some((range) => degree >= range.min && degree <= range.max);
+  return specialRanges.some(
+    (range) => degree >= range.min && degree <= range.max
+  );
 };
 
-// Reset special stop count if it's a new day
-const resetSpecialCountIfNewDay = () => {
-  let currentDate = new Date().toDateString();
-  if (currentDate !== lastSpinDate) {
-    specialStopsCount = 0;
-    lastSpinDate = currentDate;
-  }
+const isOutRange = (degree) => {
+  return outRanges.some(
+    (range) => degree >= range.min && degree <= range.max
+  );
 };
 
-// Generate a valid random spin degree
 const generateRandomDegree = () => {
-  resetSpecialCountIfNewDay();
-  
   let degree;
   let isValid = false;
-  let retryCount = 100; // Prevent infinite loops
+  const remainingWins = maxWins - currentWins;
 
-  while (!isValid && retryCount > 0) {
+  if (remainingWins <= 0) {
+    // Force OUT when no remaining wins
+    const randomRange = outRanges[Math.floor(Math.random() * outRanges.length)];
+    degree = Math.floor(Math.random() * (randomRange.max - randomRange.min + 1)) + randomRange.min;
+    return degree;
+  }
+
+  while (!isValid) {
     degree = Math.floor(Math.random() * 360);
     const inSpecialRange = isSpecialRange(degree);
 
-    if (!isWithinAllowedTime() || !inSpecialRange || specialStopsCount < specialStopLimit) {
+    // Allow special range only if within time, under special stop limit, and remaining wins > 0
+    if (
+      (!inSpecialRange || 
+       (isWithinAllowedTime() && specialStopsCount < specialStopLimit && remainingWins > 0))
+    ) {
       isValid = true;
-      
-      // Increase special stop count if it's within the special time and range
       if (isWithinAllowedTime() && inSpecialRange) {
         specialStopsCount++;
       }
     }
-
-    retryCount--; // Avoid infinite loops
   }
-
   return degree;
 };
-/* --------------- Spinning Code --------------------- */
 
+/* --------------- Spinning Code --------------------- */
 let count = 0;
 let resultValue = 101;
 
 spinBtn.addEventListener("click", () => {
+  if (gameOver) {
+    console.log("Game Over! No more spins allowed.");
+    return;
+  }
+  totalPlayers++;
   spinBtn.disabled = true;
-
-  const randomDegree = generateRandomDegree(); // Get a valid random degree
+  const randomDegree = generateRandomDegree();
   console.log("Stopping Degree:", randomDegree);
-
   let rotationInterval = window.setInterval(() => {
-    spinChart.options.rotation += resultValue; // Increment rotation
+    spinChart.options.rotation += resultValue;
     spinChart.update();
-
     if (spinChart.options.rotation >= 360) {
       count += 1;
       resultValue -= 5;
-      spinChart.options.rotation = 0; // Reset rotation after a full turn
+      spinChart.options.rotation = 0;
     } else if (count > 15 && spinChart.options.rotation === randomDegree) {
-      generateValue(randomDegree); // Display the result
+      generateValue(randomDegree);
+      totalSpins++;
+      logWinningProbability();
       clearInterval(rotationInterval);
       count = 0;
       resultValue = 101;
@@ -267,21 +206,30 @@ spinBtn.addEventListener("click", () => {
   }, 30);
 });
 
-// Debugging Helper
+// Probability of winning and remaining wins
+function logWinningProbability() {
+  const probability = (totalSpins > 0 ? (currentWins / totalSpins) * 100 : 0);
+  const remainingWins = maxWins - currentWins;
+  console.log(`Winning Probability: ${probability.toFixed(2)}%`);
+  console.log(`Remaining Wins: ${remainingWins >= 0 ? remainingWins : 0}`);
+  if (gameOver) {
+    console.log("Game Over: Landed on OUT!");
+  }
+}
+
+/* --------------- Reset Function --------------------- */
+function reset() {
+  if (!gameOver) {
+    text.innerHTML = `<p></p>`;
+    gifttext.innerHTML = `<p></p>`;
+    gift.style.display = "none";
+    spinBtn.disabled = false;
+  }
+}
+
+/* --------------- Debug Function --------------------- */
 function logCurrentState() {
   console.log("Special Stops Count:", specialStopsCount);
   console.log("Within Allowed Time:", isWithinAllowedTime());
+  console.log("Game Over:", gameOver);
 }
-
-
-function reset() {
-  text.innerHTML = `<p></p>`;
-  gifttext.innerHTML = `<p></p>`;
-  gift.style.display = 'none';
-  txt.style.display = 'block';
-  spinBtn.disabled = false;
-}
-
-
-/* --------------- End Spin Wheel  --------------------- */
-
