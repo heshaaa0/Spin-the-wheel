@@ -1,6 +1,7 @@
 /* --------------- Spin Wheel  --------------------- */
 const spinWheel = document.getElementById("spinWheel");
 const spinBtn = document.getElementById("spin_btn");
+const startBtn = document.getElementById("start_btn");
 const text = document.getElementById("text");
 const txt = document.getElementById("txt");
 const gifttext = document.getElementById("gifttext");
@@ -27,18 +28,18 @@ const size = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
 
 /* --------------- Background Colors  --------------------- */
 var spinColors = [
-  'rgb(255, 16, 71)', // Red
-  "rgb(255, 255, 255)", // White
-  'rgb(255, 16, 71)', // Red
-  "rgb(255, 255, 255)", // White
-  "rgb(255, 16, 71)", // Red
-  "rgb(255, 255, 255)", // White
-  "rgb(255, 16, 71)", // Red
-  "rgb(255, 255, 255)", // White
-  "rgb(255, 16, 71)", // Red
-  "rgb(255, 255, 255)", // White
-  "rgb(255, 16, 71)", // Red
-  "rgb(255, 255, 255)", // White
+  'rgb(255, 16, 71)', 
+  "rgb(255, 255, 255)", 
+  'rgb(255, 16, 71)', 
+  "rgb(255, 255, 255)",
+  "rgb(255, 16, 71)", 
+  "rgb(255, 255, 255)", 
+  "rgb(255, 16, 71)", 
+  "rgb(255, 255, 255)", 
+  "rgb(255, 16, 71)",
+  "rgb(255, 255, 255)", 
+  "rgb(255, 16, 71)",
+  "rgb(255, 255, 255)",
 ];
 
 /* --------------- Chart --------------------- */
@@ -89,15 +90,19 @@ const generateValue = (angleValue) => {
         gifttext.classList.add("gift-animation");
         gift.style.display = "block";
         currentWins++; // Increment wins for gift outcomes
+        txt.style.display ="none";
+        spinBtn.disabled = true;
       } else if ([31, 91, 211, 271].includes(i.minDegree)) { // OUT segments
-        gifttext.innerHTML = `<p>OUT - Game Over!</p>`;
+        gifttext.innerHTML = `<p style="font-size:72px">OUT - Game Over!</p>`;
         text.innerHTML = `<p>No more spins allowed!</p>`;
         gift.style.display = "none";
         spinBtn.disabled = true; // Permanently disable spin button
         gameOver = true; // Set game-over state
+        txt.style.display ="none";
       } else { // 🔄 segments
-        gifttext.innerHTML = `<p>SPIN AGAIN</p>`;
+        gifttext.innerHTML = `<p style="font-size:72px">SPIN AGAIN</p>`;
         gift.style.display = "none";
+        txt.style.display ="none";
       }
       if (!gameOver) {
         spinBtn.disabled = false; // Re-enable button unless game is over
@@ -206,28 +211,36 @@ spinBtn.addEventListener("click", () => {
   }, 30);
 });
 
+// Start button to reset the game
+startBtn.addEventListener("click", () => {
+  reset();
+  console.log("Game Started!");
+});
+
 // Probability of winning and remaining wins
 function logWinningProbability() {
   const probability = (totalSpins > 0 ? (currentWins / totalSpins) * 100 : 0);
   const remainingWins = maxWins - currentWins;
-  console.log(`Winning Probability: ${probability.toFixed(2)}%`);
+  // console.log(`Winning Probability: ${probability.toFixed(2)}%`);
   console.log(`Remaining Wins: ${remainingWins >= 0 ? remainingWins : 0}`);
   if (gameOver) {
     console.log("Game Over: Landed on OUT!");
   }
 }
 
-/* --------------- Reset Function --------------------- */
+/* --------------- Reset --------------------- */
 function reset() {
-  if (!gameOver) {
-    text.innerHTML = `<p></p>`;
-    gifttext.innerHTML = `<p></p>`;
-    gift.style.display = "none";
-    spinBtn.disabled = false;
-  }
+
+  location.reload()
+  // if (!gameOver) {
+  //   text.innerHTML = `<p>Spin the Wheel and Win Exciting Gift</p>`;
+  //   gifttext.innerHTML = `<p></p>`;
+  //   gift.style.display = "none";
+  //   spinBtn.disabled = false;
+  // }
 }
 
-/* --------------- Debug Function --------------------- */
+/* --------------- Debug --------------------- */
 function logCurrentState() {
   console.log("Special Stops Count:", specialStopsCount);
   console.log("Within Allowed Time:", isWithinAllowedTime());
